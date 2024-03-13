@@ -2,121 +2,121 @@
     {
       "Query": "Lấy danh sách mã chứng khoán có doanh thu hoạt động môi giới chứng khoán lớn hơn 10000 trong quý 1 năm 2023.",
       "Eng_query": "Retrieve a list of stock codes with securities brokerage revenue greater than 10000 in the first quarter of 2023.",
-      "SQL": "SELECT maChungKhoan FROM ThongTinChungKhoan WHERE quy = 1 AND nam = 2023 AND doanhthuhoatdongmoigioick > 10000",
+      "SQL": "SELECT code FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 1 AND nam = 2023 AND doanhthuhoatdongmoigioick > 10000",
       "Type": "where"
     },
     {
       "Query": "Tổng doanh thu hoạt động môi giới chứng khoán theo từng quý trong năm 2023.",
       "Eng_query": "Total securities brokerage revenue by quarter in 2023.",
-      "SQL": "SELECT quy, SUM(doanhthuhoatdongmoigioick) as tongDoanhThu FROM ThongTinChungKhoan WHERE nam = 2023 GROUP BY quy",
+      "SQL": "SELECT quy, SUM(doanhthuhoatdongmoigioick) as tongDoanhThu FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE nam = 2023 GROUP BY quy",
       "Type": "group_by"
     },
     {
       "Query": "Liệt kê mã chứng khoán và doanh thu hoạt động môi giới chứng khoán từ cao đến thấp trong quý 2 năm 2023.",
       "Eng_query": "List stock codes and securities brokerage revenue from highest to lowest in the second quarter of 2023.",
-      "SQL": "SELECT maChungKhoan, doanhthuhoatdongmoigioick FROM ThongTinChungKhoan WHERE quy = 2 AND nam = 2023 ORDER BY doanhthuhoatdongmoigioick DESC",
+      "SQL": "SELECT code, doanhthuhoatdongmoigioick FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 2 AND nam = 2023 ORDER BY doanhthuhoatdongmoigioick DESC",
       "Type": "order_by"
     },
     {
       "Query": "Tìm mã chứng khoán có doanh thu hoạt động môi giới chứng khoán tăng cao nhất từ quý 1 đến quý 2 năm 2023.",
       "Eng_query": "Find the stock code with the highest increase in securities brokerage revenue from the first to the second quarter of 2023.",
-      "SQL": "WITH Q1 AS (SELECT maChungKhoan, doanhthuhoatdongmoigioick as Q1Revenue FROM ThongTinChungKhoan WHERE quy = 1 AND nam = 2023), Q2 AS (SELECT maChungKhoan, doanhthuhoatdongmoigioick as Q2Revenue FROM ThongTinChungKhoan WHERE quy = 2 AND nam = 2023) SELECT Q1.maChungKhoan FROM Q1 JOIN Q2 ON Q1.maChungKhoan = Q2.maChungKhoan ORDER BY Q2.Q2Revenue - Q1.Q1Revenue DESC LIMIT 1",
+      "SQL": "WITH Q1 AS (SELECT code, doanhthuhoatdongmoigioick as Q1Revenue FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 1 AND nam = 2023), Q2 AS (SELECT code, doanhthuhoatdongmoigioick as Q2Revenue FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 2 AND nam = 2023) SELECT Q1.code FROM Q1 JOIN Q2 ON Q1.code = Q2.code ORDER BY Q2.Q2Revenue - Q1.Q1Revenue DESC LIMIT 1",
       "Type": "date"
     },
     {
       "Query": "Tính tỷ lệ doanh thu hoạt động môi giới chứng khoán trên tổng doanh thu của mỗi mã chứng khoán trong quý 4 năm 2023.",
       "Eng_query": "Calculate the ratio of securities brokerage revenue to total revenue for each stock code in the fourth quarter of 2023.",
-      "SQL": "SELECT maChungKhoan, (doanhthuhoatdongmoigioick / SUM(doanhthuhoatdongmoigioick) OVER()) * 100 as tyLe FROM ThongTinChungKhoan WHERE quy = 4 AND nam = 2023",
+      "SQL": "SELECT code, (doanhthuhoatdongmoigioick / SUM(doanhthuhoatdongmoigioick) OVER()) * 100 as tyLe FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 4 AND nam = 2023",
       "Type": "ratio"
     },
     {
       "Query": "Liệt kê mã chứng khoán có lợi nhuận sau thuế dương trong quý 3 năm 2023.",
       "Eng_query": "List stock codes with positive net profit in the third quarter of 2023.",
-      "SQL": "SELECT maChungKhoan FROM ThongTinChungKhoan WHERE quy = 3 AND nam = 2023 AND lnsauthue > 0",
+      "SQL": "SELECT code FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 3 AND nam = 2023 AND lnsauthue > 0",
       "Type": "where"
     },
     {
       "Query": "Tính tổng lợi nhuận sau thuế theo từng năm.",
       "Eng_query": "Calculate total net profit by year.",
-      "SQL": "SELECT nam, SUM(lnsauthue) as tongLai FROM ThongTinChungKhoan GROUP BY nam",
+      "SQL": "SELECT nam, SUM(lnsauthue) as tongLai FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly GROUP BY nam",
       "Type": "group_by"
     },
     {
       "Query": "Liệt kê top 3 mã chứng khoán có lợi nhuận sau thuế cao nhất trong năm 2023.",
       "Eng_query": "List the top 3 stock codes with the highest net profit in 2023.",
-      "SQL": "SELECT maChungKhoan, lnsauthue FROM ThongTinChungKhoan WHERE nam = 2023 ORDER BY lnsauthue DESC LIMIT 3",
+      "SQL": "SELECT code, lnsauthue FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE nam = 2023 ORDER BY lnsauthue DESC LIMIT 3",
       "Type": "order_by"
     },
     {
       "Query": "Tìm mã chứng khoán có doanh thu từ tư vấn đầu tư chứng khoán tăng cao nhất từ quý 3 đến quý 4 năm 2023.",
       "Eng_query": "Find the stock code with the highest increase in securities investment consulting revenue from the third to the fourth quarter of 2023.",
-      "SQL": "WITH Q3 AS (SELECT maChungKhoan, doanhthutuvandautuck as Q3Revenue FROM ThongTinChungKhoan WHERE quy = 3 AND nam = 2023), Q4 AS (SELECT maChungKhoan, doanhthutuvandautuck as Q4Revenue FROM ThongTinChungKhoan WHERE quy = 4 AND nam = 2023) SELECT Q3.maChungKhoan FROM Q3 JOIN Q4 ON Q3.maChungKhoan = Q4.maChungKhoan ORDER BY Q4.Q4Revenue - Q3.Q3Revenue DESC LIMIT 1",
+      "SQL": "WITH Q3 AS (SELECT code, doanhthutuvandautuck as Q3Revenue FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 3 AND nam = 2023), Q4 AS (SELECT code, doanhthutuvandautuck as Q4Revenue FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 4 AND nam = 2023) SELECT Q3.code FROM Q3 JOIN Q4 ON Q3.code = Q4.code ORDER BY Q4.Q4Revenue - Q3.Q3Revenue DESC LIMIT 1",
       "Type": "date"
     },
     {
       "Query": "Tính tỷ lệ lợi nhuận sau thuế trên tổng doanh thu cho mỗi mã chứng khoan trong năm 2023.",
       "Eng_query": "Calculate the ratio of net profit to total revenue for each stock code in 2023.",
-      "SQL": "SELECT maChungKhoan, (lnsauthue / SUM(lnsauthue) OVER()) * 100 as tyLeLai FROM ThongTinChungKhoan WHERE nam = 2023",
+      "SQL": "SELECT code, (lnsauthue / SUM(lnsauthue) OVER()) * 100 as tyLeLai FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE nam = 2023",
       "Type": "ratio"
     },
     {
       "Query": "Liệt kê mã chứng khoán có chi phí hoạt động dưới 5000 trong quý 4 năm 2023.",
       "Eng_query": "List stock codes with operating expenses below 5000 in the fourth quarter of 2023.",
-      "SQL": "SELECT maChungKhoan FROM ThongTinChungKhoan WHERE quy = 4 AND nam = 2023 AND cphoatdong < 5000",
+      "SQL": "SELECT code FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 4 AND nam = 2023 AND cphoatdong < 5000",
       "Type": "where"
     },
     {
       "Query": "Tính tổng chi phí hoạt động theo từng quý trong năm 2023.",
       "Eng_query": "Calculate total operating expenses by quarter in 2023.",
-      "SQL": "SELECT quy, SUM(cphoatdong) as tongChiPhi FROM ThongTinChungKhoan WHERE nam = 2023 GROUP BY quy",
+      "SQL": "SELECT quy, SUM(cphoatdong) as tongChiPhi FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE nam = 2023 GROUP BY quy",
       "Type": "group_by"
     },
     {
       "Query": "Liệt kê 5 mã chứng khoán có chi phí hoạt động thấp nhất trong năm 2023.",
       "Eng_query": "List the 5 stock codes with the lowest operating expenses in 2023.",
-      "SQL": "SELECT maChungKhoan, cphoatdong FROM ThongTinChungKhoan WHERE nam = 2023 ORDER BY cphoatdong ASC LIMIT 5",
+      "SQL": "SELECT code, cphoatdong FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE nam = 2023 ORDER BY cphoatdong ASC LIMIT 5",
       "Type": "order_by"
     },
     {
       "Query": "Tìm mã chứng khoán có sự tăng trưởng doanh thu từ hoạt động bảo lãnh, đại lý phát hành chứng khoán từ quý 2 đến quý 3 năm 2023.",
       "Eng_query": "Find the stock code with the highest growth in revenue from underwriting and securities issuance agency activities from the second to the third quarter of 2023.",
-      "SQL": "WITH Q2 AS (SELECT maChungKhoan, doanhthubaolanhdailyphathanhck as Q2Revenue FROM ThongTinChungKhoan WHERE quy = 2 AND nam = 2023), Q3 AS (SELECT maChungKhoan, doanhthubaolanhdailyphathanhck as Q3Revenue FROM ThongTinChungKhoan WHERE quy = 3 AND nam = 2023) SELECT Q2.maChungKhoan FROM Q2 JOIN Q3 ON Q2.maChungKhoan = Q3.maChungKhoan ORDER BY Q3.Q3Revenue - Q2.Q2Revenue DESC LIMIT 1",
+      "SQL": "WITH Q2 AS (SELECT code, doanhthubaolanhdailyphathanhck as Q2Revenue FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 2 AND nam = 2023), Q3 AS (SELECT code, doanhthubaolanhdailyphathanhck as Q3Revenue FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 3 AND nam = 2023) SELECT Q2.code FROM Q2 JOIN Q3 ON Q2.code = Q3.code ORDER BY Q3.Q3Revenue - Q2.Q2Revenue DESC LIMIT 1",
       "Type": "date"
     },
     {
       "Query": "Tính tỷ lệ chi phí hoạt động trên tổng chi phí hoạt động của tất cả các mã chứng khoán trong quý 1 năm 2023.",
       "Eng_query": "Calculate the ratio of operating expenses to total operating expenses for all stock codes in the first quarter of 2023.",
-      "SQL": "SELECT maChungKhoan, (cphoatdong / SUM(cphoatdong) OVER()) * 100 as tyLeChiPhi FROM ThongTinChungKhoan WHERE quy = 1 AND nam = 2023",
+      "SQL": "SELECT code, (cphoatdong / SUM(cphoatdong) OVER()) * 100 as tyLeChiPhi FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 1 AND nam = 2023",
       "Type": "ratio"
     },
     {
       "Query": "Liệt kê mã chứng khoán với doanh thu hoạt động tài chính lớn hơn 20000 trong quý 1 năm 2023.",
       "Eng_query": "List stock codes with financial operating revenue greater than 20000 in the first quarter of 2023.",
-      "SQL": "SELECT maChungKhoan FROM ThongTinChungKhoan WHERE quy = 1 AND nam = 2023 AND doanhthuhoatdongtc > 20000",
+      "SQL": "SELECT code FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 1 AND nam = 2023 AND doanhthuhoatdongtc > 20000",
       "Type": "where"
     },
     {
       "Query": "Tổng doanh thu hoạt động tài chính theo từng năm.",
       "Eng_query": "Total financial operating revenue by year.",
-      "SQL": "SELECT nam, SUM(doanhthuhoatdongtc) as tongDoanhThuTaiChinh FROM ThongTinChungKhoan GROUP BY nam",
+      "SQL": "SELECT nam, SUM(doanhthuhoatdongtc) as tongDoanhThuTaiChinh FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly GROUP BY nam",
       "Type": "group_by"
     },
     {
       "Query": "Liệt kê top 4 mã chứng khoán có doanh thu hoạt động tài chính cao nhất trong quý 3 năm 2023.",
       "Eng_query": "List the top 4 stock codes with the highest financial operating revenue in the third quarter of 2023.",
-      "SQL": "SELECT maChungKhoan, doanhthuhoatdongtc FROM ThongTinChungKhoan WHERE quy = 3 AND nam = 2023 ORDER BY doanhthuhoatdongtc DESC LIMIT 4",
+      "SQL": "SELECT code, doanhthuhoatdongtc FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 3 AND nam = 2023 ORDER BY doanhthuhoatdongtc DESC LIMIT 4",
       "Type": "order_by"
     },
     {
       "Query": "Tìm mã chứng khoán có doanh thu từ hoạt động tư vấn tài chính tăng cao nhất từ quý 4 năm 2022 đến quý 1 năm 2023.",
       "Eng_query": "Find the stock code with the highest increase in financial consulting revenue from the fourth quarter of 2022 to the first quarter of 2023.",
-      "SQL": "WITH Q4_2022 AS (SELECT maChungKhoan, doanhthuhoatdongtuvantc as Q4_2022Revenue FROM ThongTinChungKhoan WHERE quy = 4 AND nam = 2022), Q1_2023 AS (SELECT maChungKhoan, doanhthuhoatdongtuvantc as Q1_2023Revenue FROM ThongTinChungKhoan WHERE quy = 1 AND nam = 2023) SELECT Q4_2022.maChungKhoan FROM Q4_2022 JOIN Q1_2023 ON Q4_2022.maChungKhoan = Q1_2023.maChungKhoan ORDER BY Q1_2023.Q1_2023Revenue - Q4_2022.Q4_2022Revenue DESC LIMIT 1",
+      "SQL": "WITH Q4_2022 AS (SELECT code, doanhthuhoatdongtuvantc as Q4_2022Revenue FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 4 AND nam = 2022), Q1_2023 AS (SELECT code, doanhthuhoatdongtuvantc as Q1_2023Revenue FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE quy = 1 AND nam = 2023) SELECT Q4_2022.code FROM Q4_2022 JOIN Q1_2023 ON Q4_2022.code = Q1_2023.code ORDER BY Q1_2023.Q1_2023Revenue - Q4_2022.Q4_2022Revenue DESC LIMIT 1",
       "Type": "date"
     },
     {
       "Query": "Tính tỷ lệ doanh thu từ hoạt động tư vấn tài chính trên tổng doanh thu từ tất cả hoạt động trong năm 2023.",
       "Eng_query": "Calculate the ratio of revenue from financial consulting activities to total revenue from all activities in 2023.",
-      "SQL": "SELECT maChungKhoan, (doanhthuhoatdongtuvantc / SUM(doanhthuhoatdongtuvantc) OVER()) * 100 as tyLeDoanhThuTuVanTaiChinh FROM ThongTinChungKhoan WHERE nam = 2023",
+      "SQL": "SELECT code, (doanhthuhoatdongtuvantc / SUM(doanhthuhoatdongtuvantc) OVER()) * 100 as tyLeDoanhThuTuVanTaiChinh FROM fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly WHERE nam = 2023",
       "Type": "ratio"
     }
   ]
