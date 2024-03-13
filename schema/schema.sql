@@ -1,5 +1,5 @@
-CREATE TABLE ThongTinChungKhoan (
-  maChungKhoan VARCHAR(10), -- Mã chứng khoán, ví dụ: ABC
+CREATE TABLE fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly (
+  code VARCHAR(10), -- Mã chứng khoán, ví dụ: ABC
   quy INTEGER, -- Quý
   nam INTEGER, -- Năm
   doanhthuhoatdong DECIMAL(18,2), -- I. Doanh thu hoạt động

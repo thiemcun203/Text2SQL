@@ -1,5 +1,5 @@
-CREATE TABLE ThongTinChungKhoan (
-  maChungKhoan VARCHAR(10), -- Stock code, e.g., ABC
+CREATE TABLE fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly (
+  code VARCHAR(10), -- Stock code, e.g., ABC
   quy INTEGER, -- Quarter
   nam INTEGER, -- Year
   doanhthuhoatdong DECIMAL(18,2), -- I. Operating revenue
