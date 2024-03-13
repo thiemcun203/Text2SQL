@@ -80,5 +80,5 @@ CREATE TABLE fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly (
   tongthunhaptoandienphanbochovonchusohuu DECIMAL(18,2), -- 2. Total comprehensive income allocated to equity holders of the parent
   laicobantrencophieu DECIMAL(18,2), -- Basic earnings per share
   thunhapphaloangtrencophieu DECIMAL(18,2) -- Diluted earnings per share
-  CONSTRAINT PK PRIMARY KEY (maChungKhoan, quy, nam)
+  CONSTRAINT PK PRIMARY KEY (code, quy, nam)
 );

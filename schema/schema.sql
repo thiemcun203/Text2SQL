@@ -80,5 +80,5 @@ CREATE TABLE fact_period_bctc_ket_qua_kinh_doanh_chung_khoan_quarterly (
   tongthunhaptoandienphanbochovonchusohuu DECIMAL(18,2), -- 2. Tổng thu nhập toàn diện phân bổ cho vốn chủ sở hữu
   laicobantrencophieu DECIMAL(18,2), -- Lãi cơ bản trên cổ phiếu
   thunhapphaloangtrencophieu DECIMAL(18,2) -- Thu nhập pha loãng trên cổ phiếu
-  CONSTRAINT PK PRIMARY KEY (maChungKhoan, quy, nam)
+  CONSTRAINT PK PRIMARY KEY (code, quy, nam)
 );
